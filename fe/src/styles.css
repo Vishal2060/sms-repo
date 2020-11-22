@@ -1,0 +1,35 @@
+.page-item.active .page-link {
+  z-index: 1;
+  color: #155724 !important;
+  background-color: #d4edda !important;
+  border-color: #c3e6cb !important;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: .5rem .75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #155724 !important;
+  background-color: #fff !important;
+  border: 1px solid #c3e6cb !important;
+}
+
+.pagination {
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: .25rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-green .bs-datepicker-head {
+  background-color: #d4edda !important;
+}
+
+.bs-datepicker-head button {
+  color: #155724 !important;
+}

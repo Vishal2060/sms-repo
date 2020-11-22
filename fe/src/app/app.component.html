@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="col-sm-1"></div>
+  <nav class=" col-sm-10 navbar navbar-default">
+    <a class="navbar-brand">SMS Challenge</a>
+    <form class="form-inline">
+      <input aria-label="Search" class="form-control mr-sm-4" placeholder="Search" type="search" [(ngModel)]="searchString" [ngModelOptions]="{standalone: true}">
+      <button class="btn btn-outline-success mr-sm-4" type="submit" (click)="search(searchString)" >Search</button>
+      <button class="btn btn-success mr-sm-4" type="button" (click)="clearFilters()">Clear Filters</button>
+    </form>
+  </nav>
+  <div class="col-sm-1"></div>
+</div>
+
+<div class="row">
+
+  <div class="col-sm-2"></div>
+  <table class=" col-sm-8 table table table-hover">
+    <thead class="alert-success">
+
+    <tr>
+      <th>City <br/>
+        <button (click)="sort('city')" class="btn-default" style="cursor: pointer"> &#8593;</button>
+        <button (click)="sort('city-')" class="btn-default" style="cursor: pointer"> &#8595;</button>
+      </th>
+      <th>Start Date <br/>
+        <button (click)="sort('startDate')" class="btn-default" style="cursor: pointer"> &#8593;</button>
+        <button (click)="sort('startDate-')" class="btn-default" style="cursor: pointer"> &#8595;</button>
+      </th>
+      <th>End Date <br/>
+        <button (click)="sort('endDate')" class="btn-default" style="cursor: pointer"> &#8593;</button>
+        <button (click)="sort('endDate-')" class="btn-default" style="cursor: pointer"> &#8595;</button>
+      </th>
+      <th>Price <br/>
+        <button (click)="sort('price')" class="btn-default" style="cursor: pointer"> &#8593;</button>
+        <button (click)="sort('price-')" class="btn-default" style="cursor: pointer"> &#8595;</button>
+      </th>
+      <th>Status <br/>
+        <button (click)="sort('status')" class="btn-default" style="cursor: pointer"> &#8593;</button>
+        <button (click)="sort('status-')" class="btn-default" style="cursor: pointer"> &#8595;</button>
+      </th>
+      <th>Color <br/>
+        <button (click)="sort('color')" class="btn-default" style="cursor: pointer"> &#8593;</button>
+        <button (click)="sort('color-')" class="btn-default" style="cursor: pointer"> &#8595;</button>
+      </th>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td>
+        <div>
+          <input #fromStartDateField
+                 (ngModelChange)="dateChanged('fromStartDate', fromStartDateField.value)"
+                 [maxDate]="toStartDate"
+                 [(ngModel)]="fromStartDate"
+                 bsDatepicker
+                 class="form-control"
+                 placeholder="from"
+                 type="text">
+        </div>
+        <br/>
+        <div>
+          <input #toStartDateField
+                 (ngModelChange)="dateChanged('toStartDate', toStartDateField.value)"
+                 [minDate]="fromStartDate"
+                 [(ngModel)]="toStartDate"
+                 bsDatepicker
+                 class="form-control"
+                 placeholder="to"
+                 type="text">
+        </div>
+      </td>
+      <td>
+        <div>
+          <input #fromEndDateField
+                 (ngModelChange)="dateChanged('fromEndDate', fromEndDateField.value)"
+                 [maxDate]="toEndDate"
+                 [(ngModel)]="fromEndDate"
+                 bsDatepicker
+                 class="form-control"
+                 placeholder="from"
+                 type="text">
+        </div>
+        <br/>
+        <div>
+          <input #toEndDateField
+                 (ngModelChange)="dateChanged('toEndDate', toEndDateField.value)"
+                 [minDate]="fromEndDate"
+                 [(ngModel)]="toEndDate"
+                 bsDatepicker
+                 class="form-control"
+                 placeholder="to"
+                 type="text">
+        </div>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let entity of data">
+      <td>{{entity.city}}</td>
+      <td>{{entity.start_date | date:'M/d/yyyy'}}</td>
+      <td>{{entity.end_date | date:'M/d/yyyy' }}</td>
+      <td>&euro; {{entity.price}}</td>
+      <td>{{entity.status}}</td>
+      <td> <i [ngStyle]="{'color': entity.color }">&#9639;</i> {{entity.color}}</td>
+    </tr>
+    </tbody>
+
+  </table>
+
+
+  <div class="col-sm-2"></div>
+
+
+</div>
+
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8" style="margin-left: auto;margin-right: auto;display: block">
+    <pagination (pageChanged)="pageChanged($event)" [(ngModel)]="page" [maxSize]="maxSize"
+                [totalItems]="count"></pagination>
+  </div>
+  <div class="col-sm-2"></div>
+</div>
